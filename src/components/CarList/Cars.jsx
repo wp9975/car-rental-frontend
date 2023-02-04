@@ -15,9 +15,9 @@ const Cars = () => {
   return (
     <section className="bg-snow">
         <Filters setData={setData}/>
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-[2400px] gap-2 mx-auto">
         {dataCars.map((item, index) => (
-          <Link key={index} to={`/reservation/${item.carLink}`} className='mx-auto'>
+          <Link key={index} to={`/reservation/${item.carLink}`} className=''>
             <CarCard item={item}  />
           </Link>
         ))}

@@ -30,28 +30,28 @@ const CarCard = (props) => {
         <dd className="font-medium">{brand} {model}</dd>
       </div>
     </dl>
-        <div className="mt-3 flex items-center gap-6 text-sm">
+        <div className="mt-3 flex items-center gap-4 text-sm">
           <div className="inline-flex shrink-0 items-center">
             <BiCalendar size={24}/>
-            <div className="ml-2 mt-1">
+            <div className="ml-1 mt-1">
               <p className="text-gray">{type}</p>
             </div>
           </div>
           <div className="inline-flex shrink-0 items-center">
             <BiBattery size={24}/>
-            <div className="ml-2 mt-1">
+            <div className="ml-1 mt-1">
               <p className="text-gray">{fuel}</p>
             </div>
           </div>
           <div className="inline-flex shrink-0 items-center">
             <BiGasPump size={24}/>
-            <div className="ml-2 mt-1">
+            <div className="ml-1 mt-1">
               <p className="text-gray">{fuelConsumption}</p>
             </div>
           </div>
           <div className="inline-flex shrink-0 items-center">
             <BiCheckDouble size={24}/>
-            <div className="ml-2 mt-1">
+            <div className="ml-1 mt-1">
               <p className="text-gray">{quantity}</p>
             </div>
           </div>
