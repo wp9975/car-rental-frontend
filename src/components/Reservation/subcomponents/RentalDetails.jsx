@@ -8,8 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 const RentalDetails = () => {
   const { carSlug } = useParams();
   const carItem = CarsData.find((item) => item.carLink === carSlug)
-  const [dateStart, setDateStart] = useState(new Date("2023-02-04"));
-  const [dateEnd, setDateEnd] = useState(new Date("2023-02-05"));
+  const [dateStart, setDateStart] = useState();
+  const [dateEnd, setDateEnd] = useState();
   const [distance, setDistance] = useState(20);
   const [driverLicenseYear, setDriverLicenseYear] = useState();
   const [calculations, setCalculations] = useState();

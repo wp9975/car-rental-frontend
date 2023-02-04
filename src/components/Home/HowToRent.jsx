@@ -7,7 +7,7 @@ const HowToRent = () => {
         <h2 className="text-3xl font-bold py-10 text-center sm:text-4xl">Jak to działa?</h2>
         <div className="flex flex-wrap p-2">
         <div className="lg:w-2/5 md:w-1/2 flex flex-col pr-3">
-          <div class="flex relative pb-12">
+          <div className="flex relative pb-12">
             <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-silver pointer-events-none"></div>
             </div>
@@ -26,7 +26,7 @@ const HowToRent = () => {
               </p>
             </div>
           </div>
-          <div class="flex relative pb-12">
+          <div className="flex relative pb-12">
             <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-silver pointer-events-none"></div>
             </div>
@@ -45,7 +45,7 @@ const HowToRent = () => {
               </p>
             </div>
           </div>
-          <div class="flex relative pb-12">
+          <div className="flex relative pb-12">
             <div className="flex pb-10">
               <div className="flex-shrink-0 w-10 h-9 rounded-lg bg-blackCoffee text-white z-10 relative ">
                 <AiFillCar size={32} className="m-auto" />

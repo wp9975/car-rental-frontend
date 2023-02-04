@@ -15,7 +15,7 @@ const Gallery = () => {
         </div>
       </div>
       <div className="flex flex-wrap md:w-1/2">
-        <div class="md:p-2 p-1 w-full">
+        <div className="md:p-2 p-1 w-full">
           <img alt="gallery" className="w-full h-full object-cover object-center block" src="https://images.unsplash.com/photo-1526626607369-f89fe1ed77a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"/>
         </div>
         <div className="md:p-2 p-1 w-1/2 hidden md:block">

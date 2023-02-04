@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
 import ReservationPage from "./pages/ReservationPage";
 import CarListPage from "./pages/CarListPage";
+import ChooseCar from "./components/Reservation/ChooseCar";
 
 function App() {
   const router = createBrowserRouter([
@@ -40,7 +41,7 @@ function App() {
           path: "/reservation",
           exact: true,
           name: "Reservation",
-          element: <ReservationPage />,
+          element: <ChooseCar />,
         },
         {
           path: "/reservation/:carSlug",

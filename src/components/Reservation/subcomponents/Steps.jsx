@@ -24,7 +24,7 @@ const Steps = (props) => {
             2
           </span>
 
-          <span className="hidden sm:ml-2 sm:block"> Address </span>
+          <span className="hidden sm:ml-2 sm:block"> Dane osobowe </span>
         </li>
 
         <li className="flex items-center bg-white p-2 border-2 rounded-md">
@@ -36,7 +36,7 @@ const Steps = (props) => {
             3
           </span>
 
-          <span className="hidden sm:ml-2 sm:block"> Payment </span>
+          <span className="hidden sm:ml-2 sm:block"> Podsumowanie </span>
         </li>
       </ol>
     </div>
