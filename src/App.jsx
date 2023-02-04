@@ -1,15 +1,14 @@
 import {
-  BrowserRouter,
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import HomeLayout from "./layouts/HomeLayout";
 import AboutUsPage from "./pages/AboutUsPage";
-import CarFleetPage from "./pages/CarFleetPage";
 import ContactPage from "./pages/ContactPage";
 import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
 import ReservationPage from "./pages/ReservationPage";
+import CarListPage from "./pages/CarListPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,7 +22,7 @@ function App() {
           path: "/fleet",
           exact: true,
           name: "Fleet",
-          element: <CarFleetPage />,
+          element: <CarListPage />,
         },
         {
           path: "/contact",
@@ -43,6 +42,12 @@ function App() {
           name: "Reservation",
           element: <ReservationPage />,
         },
+        {
+          path: "/reservation/:carSlug",
+          exact: true,
+          name: "ReservationCar",
+          element: <ReservationPage />,
+        }
       ],
     },
   ]);
