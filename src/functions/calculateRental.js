@@ -64,7 +64,7 @@ const calculateRental = (
       break;
   }
 
-  const nettoPrice = dailyRentalPrice * rentalDays;
+  const nettoPrice = dailyRentalPrice * rentalDays + fuelPrice;
   const bruttoPrice = nettoPrice * vat;
 
   return {
