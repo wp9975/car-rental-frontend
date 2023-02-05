@@ -1,15 +1,27 @@
 import React from 'react'
 
 const PersonalDetails = (props) => {
+  const {updateFormPersonalData, formPersonalData, updateStep} = props
 
   const handlerPrevButton = () => {
-    props.updateStep(1);
+    updateStep(1);
   }
 
   const handlerSubmitForm = (event) => {
     event.preventDefault();
-    console.log('sgsg')
+    updateFormPersonalData({
+      firstName: document.getElementById('first_name').value,
+      lastName: document.getElementById('last_name').value,
+      email: document.getElementById('email_address').value,
+      country: document.getElementById('country').value,
+      address: document.getElementById('address').value,
+      city: document.getElementById('city').value,
+      postalCode: document.getElementById('postal_code').value
+    })
+    updateStep(3);
   }
+
+
 
   return (
     <div className="mt-10 sm:mt-0">
@@ -44,8 +56,8 @@ const PersonalDetails = (props) => {
               </div>
 
               <div className="col-span-6">
-                <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">Adres</label>
-                <input type="text" name="street_address" id="street_address" autoComplete="street-address" required className="py-2 mt-1 focus:ring-blue focus:border-blue block w-full sm:text-sm border-blue rounded-md shadow-lg bg-snow"/>
+                <label htmlFor="address" className="block text-sm font-medium text-gray-700">Adres</label>
+                <input type="text" name="address" id="address" autoComplete="street-address" required className="py-2 mt-1 focus:ring-blue focus:border-blue block w-full sm:text-sm border-blue rounded-md shadow-lg bg-snow"/>
               </div>
 
               <div className="col-span-6 sm:col-span-6 lg:col-span-2">
@@ -72,6 +84,7 @@ const PersonalDetails = (props) => {
       </form>
     </div>
   </div>
+  {console.log(formPersonalData)}
 </div>
   )
 }

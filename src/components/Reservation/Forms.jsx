@@ -7,7 +7,15 @@ const Forms = (props) => {
   const {step} = props;
   const [carCategory, setCarCategory] = useState();
   const [calculations, setCalculations] = useState();
-  const [formPersonalData, setFormPersonalData] = useState();
+  const [formPersonalData, setFormPersonalData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    country: '',
+    address: '',
+    city: '',
+    postalCode: ''
+  });
   const [formRentalData, setFormRentalData] = useState();
 
   const displayForm = (step) => {
