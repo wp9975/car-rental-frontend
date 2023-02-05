@@ -11,11 +11,12 @@ import {
   BiCheckDouble,
   BiCar,
 } from "react-icons/bi";
+import CarInfoCard from "./CarInfoCard";
 
 const RentalDetails = (props) => {
-  const { calculations, setCalculations } = props;
+  const { calculations, setCalculations, carItem } = props;
   const { carSlug } = useParams();
-  const carItem = CarsData.find((item) => item.carLink === carSlug);
+
   const [dateStart, setDateStart] = useState();
   const [dateEnd, setDateEnd] = useState();
   const [distance, setDistance] = useState(20);
@@ -88,42 +89,7 @@ const RentalDetails = (props) => {
         <h2 className="text-4xl text-bold text-center pb-4">
           Wybrany samochód:
         </h2>
-        <div className="flex flex-wrap mx-auto xl:w-4/5">
-          <img
-            src={carItem.imgUrl}
-            className="object-cover object-center w-full rounded-md lg:w-1/2 lg:h-auto h-50"
-            alt="car"
-          />
-          <div className="w-full py-3 mt-5 lg:w-1/2">
-            <div className="px-5">
-              <h1 className="my-2 text-3xl ">
-                {carItem.brand} {carItem.model}
-              </h1>
-              <h2 className="text-md text-gray">{carItem.category}</h2>
-              <div className="flex items-center my-2">
-                <h4 className="mx-3 text-lg">
-                  <BiCar />
-                  {carItem.type}
-                </h4>
-                -
-                <h4 className="mx-3 text-lg">
-                  <BiBattery />
-                  {carItem.fuel}
-                </h4>
-                -
-                <h4 className="mx-3 text-lg">
-                  <BiGasPump />
-                  {carItem.fuelConsumption}
-                </h4>
-                -
-                <h4 className="mx-3 text-lg">
-                  <BiCheckDouble />
-                  {carItem.quantity}
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CarInfoCard carItem={carItem}/>
       </div>
       <div className="border-2 p-2 rounded-lg bg-snow m-2">
         <div className="flex flex-col items-center justify-center">

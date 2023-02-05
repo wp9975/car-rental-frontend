@@ -5,9 +5,9 @@ import Navbar from "../components/Navigation/Navbar";
 
 const HomeLayout = () => {
   return (
-    <div>
+    <div className="bg-snow">
       <Navbar />
-      <div>
+      <div className="min-h-screen">
         <Outlet />
       </div>
       <Footer />
