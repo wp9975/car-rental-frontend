@@ -22,7 +22,7 @@ const Navbar = (props) => {
             } transition-all duration-500 ease-in `}
           >
             <NavLink
-              to="/"
+              to="/car-rental-frontend/"
               onClick={() => setExpandNavbarToggle(false)}
               className={({isActive}) => isActive ? stylesLinkActive : stylesLink}
             >
@@ -31,14 +31,14 @@ const Navbar = (props) => {
 
 
             <NavLink
-              to="/about"
+              to="/car-rental-frontend/about"
               onClick={() => setExpandNavbarToggle(false)}
               className={({isActive}) => isActive ? stylesLinkActive : stylesLink}
             >
               O nas
             </NavLink>
             <NavLink
-              to="/fleet"
+              to="/car-rental-frontend/fleet"
               onClick={() => setExpandNavbarToggle(false)}
               className={({isActive}) => isActive ? stylesLinkActive : stylesLink}
             >
@@ -46,14 +46,14 @@ const Navbar = (props) => {
             </NavLink>
 
             <NavLink
-              to="/contact"
+              to="/car-rental-frontend/contact"
               onClick={() => setExpandNavbarToggle(false)}
               className={({isActive}) => isActive ? stylesLinkActive : stylesLink}
             >
               Kontakt
             </NavLink>
             <NavLink
-              to="/reservation"
+              to="/car-rental-frontend/reservation"
               onClick={() => setExpandNavbarToggle(false)}
               className={({isActive}) => isActive ? stylesLinkActive : stylesLink}
             >
