@@ -16,7 +16,7 @@ const Hero = () => {
 
           <div className="flex flex-wrap gap-4 mt-8 text-center">
             <Link
-              to="/fleet"
+              to="/car-rental-frontend/"
               className="block w-full px-12 py-3 text-sm font-medium bg-white rounded shadow text-blackCoffee hover:font-bold focus:outline-none focus:ring sm:w-auto"
             >
               Znajdź samochód
