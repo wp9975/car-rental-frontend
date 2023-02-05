@@ -22,7 +22,7 @@ const Navbar = (props) => {
             } transition-all duration-500 ease-in `}
           >
             <NavLink
-              to="/home"
+              to="/"
               onClick={() => setExpandNavbarToggle(false)}
               className={({isActive}) => isActive ? stylesLinkActive : stylesLink}
             >

@@ -14,11 +14,11 @@ import ChooseCar from "./components/Reservation/ChooseCar";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "",
       element: <HomeLayout />,
       errorElement: <ErrorPage />,
       children: [
-        { path: "/home", exact: true, name: "Home", element: <HomePage /> },
+        { path: "/", exact: true, name: "Home", element: <HomePage /> },
         {
           path: "/fleet",
           exact: true,

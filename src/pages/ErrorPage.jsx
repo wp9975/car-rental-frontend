@@ -8,7 +8,7 @@ const ErrorPage = () => {
     <p className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-wider text-male">404</p>
     <p className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-wider text-male mt-2">Page Not Found</p>
     <p className="text-lg md:text-xl lg:text-2xl text-gray-500 my-12">Sorry, the page you are looking for could not be found.</p>
-    <Link to="/home" className="flex items-center space-x-2 bg-blue text-white hover:bg-blue-700  px-4 py-2 rounded transition duration-150">
+    <Link to="/" className="flex items-center space-x-2 bg-blue text-white hover:bg-blue-700  px-4 py-2 rounded transition duration-150">
         Return Home
     </Link>
     </div>
