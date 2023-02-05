@@ -5,7 +5,7 @@ const CarsData = [
     category: "premium",
     fuel: "benzyna",
     type: "Sedan",
-    fuelConsumption: 12.3,
+    fuelConsumption: 12.1,
     quantity: 1,
     imgUrl:
       "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
@@ -18,7 +18,7 @@ const CarsData = [
     category: "premium",
     fuel: "diesel",
     type: "SUV",
-    fuelConsumption: 12.3,
+    fuelConsumption: 8.3,
     quantity: 3,
     imgUrl:
       "https://st2.depositphotos.com/1549665/11534/i/450/depositphotos_115346726-stock-photo-novokuznetsk-russia-may-09-2016.jpg",

@@ -4,33 +4,53 @@ import CarsData from "../../../assets/data/CarsData";
 import calculateRental from "../../../functions/calculateRental";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  BiError,
+  BiGasPump,
+  BiBattery,
+  BiCheckDouble,
+  BiCar,
+} from "react-icons/bi";
 
-const RentalDetails = () => {
+const RentalDetails = (props) => {
+  const { calculations, setCalculations } = props;
   const { carSlug } = useParams();
-  const carItem = CarsData.find((item) => item.carLink === carSlug)
+  const carItem = CarsData.find((item) => item.carLink === carSlug);
   const [dateStart, setDateStart] = useState();
   const [dateEnd, setDateEnd] = useState();
   const [distance, setDistance] = useState(20);
   const [driverLicenseYear, setDriverLicenseYear] = useState();
-  const [calculations, setCalculations] = useState();
+  const [errorMessage, setErrorMessage] = useState();
   const rentalDays =
     (new Date(dateEnd).getTime() - new Date(dateStart).getTime()) / 86400000;
 
- 
-  const handleCalculateButton = (e) => {
-    e.preventDefault()
-    
-    setCalculations(
-      calculateRental(
-        carItem.category,
-        carItem.fuel,
-        carItem.fuelConsumption,
-        carItem.quantity,
-        rentalDays,
-        driverLicenseYear,
-        distance
-      )
-    );
+
+  useEffect(() => {
+    setErrorMessage();
+  }, [dateEnd, dateStart, distance, driverLicenseYear]);
+
+  const handlerCalculateButton = (e) => {
+    e.preventDefault();
+    if (
+      dateStart == undefined ||
+      dateEnd == undefined ||
+      distance == undefined ||
+      driverLicenseYear == undefined
+    ) {
+      setErrorMessage("Wypełnij formularz!");
+    } else {
+      setCalculations(
+        calculateRental(
+          carItem.category,
+          carItem.fuel,
+          carItem.fuelConsumption,
+          carItem.quantity,
+          rentalDays,
+          driverLicenseYear,
+          distance
+        )
+      );
+    }
   };
 
   const onChangeHandler = (value) => {
@@ -46,6 +66,22 @@ const RentalDetails = () => {
     setDriverLicenseYear(event.target.value);
   };
 
+  const handlerNextButton = () => {
+    if (
+      carItem.category == "premium" &&
+      new Date().getFullYear() - driverLicenseYear < 3
+    ) {
+      setErrorMessage(
+        "Wypożyczenie samochodu klasy premium wymaga conajmniej 3-letniego posiadania prawa jazdy."
+      );
+    } else if (calculations === undefined) {
+      setErrorMessage("Wypełnij formularz i oblicz cenę wynajmu!");
+    } else {
+      props.setCarCategory(carItem.category);
+      props.updateStep(2);
+    }
+  };
+
   return (
     <div className="container mx-auto ">
       <div className="border-2 p-2 rounded-lg bg-snow m-2">
@@ -59,16 +95,33 @@ const RentalDetails = () => {
             alt="car"
           />
           <div className="w-full py-3 mt-5 lg:w-1/2">
-            <h1 className="my-2 text-3xl ">
-              {carItem.brand} {carItem.model}
-            </h1>
-            <h2 className="text-md text-gray">{carItem.category}</h2>
-            <div className="flex my-2">
-              <h4 className="mx-3 text-lg">{carItem.fuelConsumption}</h4>-
-              <h4 className="mx-3 text-lg">{carItem.fuel}</h4>-
-              <h4 className="mx-3 text-lg">{carItem.type}</h4>
+            <div className="px-5">
+              <h1 className="my-2 text-3xl ">
+                {carItem.brand} {carItem.model}
+              </h1>
+              <h2 className="text-md text-gray">{carItem.category}</h2>
+              <div className="flex items-center my-2">
+                <h4 className="mx-3 text-lg">
+                  <BiCar />
+                  {carItem.type}
+                </h4>
+                -
+                <h4 className="mx-3 text-lg">
+                  <BiBattery />
+                  {carItem.fuel}
+                </h4>
+                -
+                <h4 className="mx-3 text-lg">
+                  <BiGasPump />
+                  {carItem.fuelConsumption}
+                </h4>
+                -
+                <h4 className="mx-3 text-lg">
+                  <BiCheckDouble />
+                  {carItem.quantity}
+                </h4>
+              </div>
             </div>
-            <p className="leading-relaxed">{carItem.quantity}</p>
           </div>
         </div>
       </div>
@@ -78,21 +131,24 @@ const RentalDetails = () => {
           <div className="relative ">
             <DatePicker
               id="dateStartEnd"
+              minDate={new Date()}
               selectsRange={true}
               startDate={dateStart}
               endDate={dateEnd}
               onChange={onChangeHandler}
-              className="m-2 rounded-lg border-transparent  appearance-none border border-gray  py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent"
+              className="m-2 w-80 rounded-lg text-center border-transparent  appearance-none border border-gray  py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent"
               showDisabledMonthNavigation
             />
           </div>
           <label>Rok otrzymania prawa jazdy:</label>
           <div className="inline-block relative">
             <select
+              required
               onChange={handlerDriverLicenseYearChange}
               value={driverLicenseYear}
-              className="rounded-lg border-transparent appearance-none border border-gray m-2 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent"
+              className="rounded-lg w-80 text-center border-transparent appearance-none border border-gray m-2 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent"
             >
+              <option></option>
               <option value={2023}>2023</option>
               <option value={2022}>2022</option>
               <option value={2021}>2021</option>
@@ -108,61 +164,87 @@ const RentalDetails = () => {
               type="number"
               min={20}
               id="search-form-price"
-              className=" rounded-lg border-transparent  appearance-none border border-gray m-2 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent"
+              className="w-80 rounded-lg text-center border-transparent  appearance-none border border-gray m-2 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent"
               placeholder="Your price"
               onChange={handlerDistanceChange}
               value={distance}
             />
           </div>
+          <span
+            className={`bg-medium ${
+              errorMessage ? "block" : "hidden"
+            } flex items-center w-full text-xl mb-2 justify-center text-white px-6 py-2`}
+          >
+            <BiError size={32} />
+            {errorMessage}
+          </span>
         </div>
-        {calculations ? (<div className="border-t-2 p-2">
-          <div className="grid grid-cols-3 gap-3">
-            <div className="bg-white rounded-lg border-2">
-              <h4 className="text-lg text-center">Cena za dzień: </h4>
-              <p className="text-2xl text-center p-1">{calculations.dailyRentalPrice.toFixed(2)} zł</p>
+        {calculations ? (
+          <div className="border-t-2 p-2">
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-white rounded-lg border-2">
+                <h4 className="text-lg text-center">Cena za dzień: </h4>
+                <p className="text-2xl text-center p-1">
+                  {calculations.dailyRentalPrice.toFixed(2)} zł
+                </p>
+              </div>
+              <div className="bg-white rounded-lg border-2">
+                <h4 className="text-lg text-center">Liczba dni: </h4>
+                <p className="text-2xl text-center p-1">
+                  {calculations.rentalDays}
+                </p>
+              </div>
+              <div className="bg-white rounded-lg border-2">
+                <h4 className="text-lg text-center">Szacunkowy dystans: </h4>
+                <p className="text-2xl text-center p-1">
+                  {calculations.distance}
+                </p>
+              </div>
+              <div className="bg-white rounded-lg border-2">
+                <h4 className="text-lg text-center">
+                  Zniżka dla doświadczonych kierowców:
+                </h4>
+                <p className="text-2xl text-center p-1">
+                  {calculations.driverDiscount ? "Tak" : "Nie"}
+                </p>
+              </div>
+              <div className="bg-white rounded-lg border-2">
+                <h4 className="text-lg text-center">
+                  Szacunkowa cena paliwa:{" "}
+                </h4>
+                <p className="text-2xl text-center p-1">
+                  {calculations.fuelPrice.toFixed(2)} zł
+                </p>
+              </div>
+              <div className="bg-white rounded-lg border-2">
+                <h4 className="text-lg text-center">Kwota netto: </h4>
+                <p className="text-2xl text-center p-1">
+                  {calculations.nettoPrice.toFixed(2)} zł
+                </p>
+              </div>
+              <div className="bg-white rounded-lg border-2 col-span-3 text-center">
+                <h4 className="text-xl text-center">Kwota brutto: </h4>
+                <p className="text-2xl text-center p-1">
+                  {calculations.bruttoPrice.toFixed(2)} zł
+                </p>
+              </div>
             </div>
-            <div className="bg-white rounded-lg border-2">
-              <h4 className="text-lg text-center">Liczba dni: </h4>
-              <p className="text-2xl text-center p-1">{calculations.rentalDays}</p>
-            </div>
-            <div className="bg-white rounded-lg border-2">
-              <h4 className="text-lg text-center">Szacunkowy dystans: </h4>
-              <p className="text-2xl text-center p-1">{calculations.distance}</p>
-            </div>
-            <div className="bg-white rounded-lg border-2">
-              <h4 className="text-lg text-center">
-                Zniżka dla doświadczonych kierowców:
-              </h4>
-              <p className="text-2xl text-center p-1">{calculations.driverDiscount ? 'Tak' : 'Nie'}</p>
-            </div>
-            <div className="bg-white rounded-lg border-2">
-              <h4 className="text-lg text-center">Szacunkowa cena paliwa: </h4>
-              <p className="text-2xl text-center p-1">{calculations.fuelPrice.toFixed(2)} zł</p>
-            </div>
-            <div className="bg-white rounded-lg border-2">
-              <h4 className="text-lg text-center">Kwota netto: </h4>
-              <p className="text-2xl text-center p-1">{calculations.nettoPrice.toFixed(2)} zł</p>
-            </div>
-            <div className="bg-white rounded-lg border-2 col-span-3 text-center">
-              <h4 className="text-xl text-center">Kwota brutto: </h4>
-              <p className="text-2xl text-center p-1">{calculations.bruttoPrice.toFixed(2)} zł</p>
-            </div>
-            
           </div>
-        </div>) : null}
+        ) : null}
         <div className="col-span-3 flex items-center justify-around">
-              <button
-                onClick={handleCalculateButton}
-                className={`bg-blue hover:border-2 text-white font-bold py-2 px-4 border-gray rounded`}
-              >
-                Oblicz
-              </button>
-              <button
-                className={`bg-blue hover:border-2 text-white font-bold py-2 px-4 border-gray rounded`}
-              >
-                Next
-              </button>
-            </div>
+          <button
+            onClick={handlerCalculateButton}
+            className={`bg-blue hover:border-2 text-white font-bold py-2 px-4 border-gray rounded`}
+          >
+            Oblicz
+          </button>
+          <button
+            className={`bg-blue hover:border-2 text-white font-bold py-2 px-4 border-gray rounded`}
+            onClick={handlerNextButton}
+          >
+            Następny
+          </button>
+        </div>
       </div>
     </div>
   );
