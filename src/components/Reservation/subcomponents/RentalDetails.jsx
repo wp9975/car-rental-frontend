@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import CarsData from "../../../assets/data/CarsData";
 import calculateRental from "../../../functions/calculateRental";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   BiError,
-  BiGasPump,
-  BiBattery,
-  BiCheckDouble,
-  BiCar,
 } from "react-icons/bi";
 import CarInfoCard from "./CarInfoCard";
 
 const RentalDetails = (props) => {
   const { calculations, setCalculations, carItem } = props;
-  const { carSlug } = useParams();
-
+ 
   const [dateStart, setDateStart] = useState();
   const [dateEnd, setDateEnd] = useState();
   const [distance, setDistance] = useState(20);
@@ -32,10 +25,10 @@ const RentalDetails = (props) => {
 
   const handlerCalculateButton = (e) => {
     e.preventDefault();
+
     if (
       dateStart == undefined ||
       dateEnd == undefined ||
-      distance == undefined ||
       driverLicenseYear == undefined
     ) {
       setErrorMessage("Wypełnij formularz!");
