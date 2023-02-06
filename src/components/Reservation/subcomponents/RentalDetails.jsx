@@ -15,8 +15,7 @@ const RentalDetails = (props) => {
   const [distance, setDistance] = useState(20);
   const [driverLicenseYear, setDriverLicenseYear] = useState();
   const [errorMessage, setErrorMessage] = useState();
-  const rentalDays =
-    (new Date(dateEnd).getTime() - new Date(dateStart).getTime()) / 86400000;
+
 
 
   useEffect(() => {
@@ -39,7 +38,8 @@ const RentalDetails = (props) => {
           carItem.fuel,
           carItem.fuelConsumption,
           carItem.quantity,
-          rentalDays,
+          dateStart,
+          dateEnd,
           driverLicenseYear,
           distance
         )

@@ -17,13 +17,17 @@ const calculateRental = (
   fuel,
   fuelConsumption,
   quantity,
-  rentalDays,
+  dateStart,
+  dateEnd,
   driverLicenseYear,
   distance
 ) => {
   let dailyRentalPrice = parseInt(basePrice);
   let driverDiscount = false;
   let fuelPrice = 0;
+  let rentalDays =
+    (new Date(dateEnd).getTime() - new Date(dateStart).getTime()) / 86400000 +
+    1;
 
   switch (category) {
     case "basic":
