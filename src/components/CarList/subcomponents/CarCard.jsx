@@ -5,59 +5,65 @@ import {
   BiBattery,
   BiCheckDouble,
 } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const CarCard = (props) => {
-  const {brand, model, imgUrl, category, type, fuel, fuelConsumption, quantity} = props.item;
+  const {
+    brand,
+    model,
+    imgUrl,
+    category,
+    type,
+    fuel,
+    fuelConsumption,
+    quantity,
+    carLink
+  } = props.item;
 
   return (
-    <div className=" hover:shadow-2xl  md:w-auto bg-white hover:shadow-blue rounded-lg p-4 shadow-sm shadow-silver border-2 m-2">
-      <img
-        className="h-56 w-full rounded-md object-cover"
-        src={imgUrl}
-        alt=""
-      />
-      <div className="mt-2">
-      <dl>
-      <div>
-        <dt className="sr-only">Price</dt>
+    <Link        
+    to={`/car-rental-frontend/reservation/${carLink}`}
+  >
+    <div style={{backgroundImage: `url(${imgUrl})`}} className={` bg-cover  md:m-2 w-full shadow-lg flex justify-center items-center rounded-lg`}>
 
-        <dd className="text-sm text-gray-500">{category}</dd>
-      </div>
+      <div className=" z-20 w-full h-80 md:h-60 inset-0 bg-gradient-to-b from-black hover:from-black-400 to-transparent duration-300 hover:-translate-y-12 rounded-lg">
+        <div className="m-3 text-white">
+          <h1 className="text-md">{category}</h1>
 
-      <div>
-        <dt className="sr-only">Address</dt>
+          <h1 className="text-xl font-medium">
+            {brand} {model}
+          </h1>
 
-        <dd className="font-medium">{brand} {model}</dd>
-      </div>
-    </dl>
-        <div className="mt-3 flex items-center gap-4 text-sm">
-          <div className="inline-flex shrink-0 items-center">
-            <BiCalendar size={24}/>
-            <div className="ml-1 mt-1">
-              <p className="text-gray">{type}</p>
+          <div className="flex items-center gap-4 text-sm">
+            <div className="inline-flex items-center shrink-0">
+              <BiCalendar size={24} />
+              <div className="mt-1 ml-1">
+                <p className="text-lg text-white">{type}</p>
+              </div>
             </div>
-          </div>
-          <div className="inline-flex shrink-0 items-center">
-            <BiBattery size={24}/>
-            <div className="ml-1 mt-1">
-              <p className="text-gray">{fuel}</p>
+            <div className="inline-flex items-center shrink-0">
+              <BiBattery size={24} />
+              <div className="mt-1 ml-1">
+                <p className="text-lg text-white">{fuel}</p>
+              </div>
             </div>
-          </div>
-          <div className="inline-flex shrink-0 items-center">
-            <BiGasPump size={24}/>
-            <div className="ml-1 mt-1">
-              <p className="text-gray">{fuelConsumption}</p>
+            <div className="inline-flex items-center shrink-0">
+              <BiGasPump size={24} />
+              <div className="mt-1 ml-1">
+                <p className="text-lg text-white">{fuelConsumption}</p>
+              </div>
             </div>
-          </div>
-          <div className="inline-flex shrink-0 items-center">
-            <BiCheckDouble size={24}/>
-            <div className="ml-1 mt-1">
-              <p className="text-gray">{quantity}</p>
+            <div className="inline-flex items-center shrink-0">
+              <BiCheckDouble size={24} />
+              <div className="mt-1 ml-1">
+                <p className="text-lg text-white">{quantity}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

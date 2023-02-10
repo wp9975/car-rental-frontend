@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import CarsData from "../../assets/data/CarsData";
+import Cars from "./Cars";
 
-const Filters = (props) => {
+const Filters = () => {
+  const [data, setData] = useState(CarsData);
+  const [dataFiltered, setDataFiltered] = useState([]);
   const [selectedCarType, setSelectedCarType] = useState("Wszystkie");
   const [selectedCarBrand, setSelectedCarBrand] = useState("Wszystkie");
   const [selectedCarPriceCategory, setSelectedCarPriceCategory] =
@@ -46,7 +49,8 @@ const Filters = (props) => {
         return current.category === selectedCarPriceCategory;
       });
     }
-    props.setData(updatedCarsData);
+    setData(updatedCarsData);
+    setDataFiltered(updatedCarsData);
   };
 
 
@@ -64,8 +68,8 @@ const Filters = (props) => {
 
 
   return (
+    <div>
     <div className=" py-3 border-b-2 mb-2">
-
       <div className="mx-auto flex flex-wrap items-center justify-center gap-1 max-w-screen-2xl">
         <div className="p-2 ">
           <label className="text-lg">
@@ -122,6 +126,8 @@ const Filters = (props) => {
           <button id="clearFiltersButton" className="px-6 py-3 bg-blue rounded-lg text-white" >Wyczyść filtry</button>
         </div>
       </div>
+    </div>
+        <Cars data={data} dataFiltered={dataFiltered}/>
     </div>
   );
 };
