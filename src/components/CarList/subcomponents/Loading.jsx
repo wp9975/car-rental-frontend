@@ -6,11 +6,12 @@ export const LoadingCard = () => {
     );
 }
 
-export const LoadingPosts = () => {
-    const loadPages = [1, 2, 3, 4, 5, 6,7,8,9,10];
+export const Loading = () => {
+    const numOfElements = 10;
+    const loadingCards = Array.from({ length: numOfElements }, (_, index) => <LoadingCard key={index} />);
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-[2000px] gap-4 mx-auto mt-8">
-        {loadPages.map(num => {return <LoadingCard />})}
+        {loadingCards}
         </div>
     );
 }

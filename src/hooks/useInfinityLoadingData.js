@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 
   function useInfinityLoadingData(data, pageSize) {
     const [page, setPage] = useState(1);

@@ -1,57 +1,92 @@
-import React, { useEffect, useRef, useState } from "react";
-
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
+import { getCarsList } from "../../utils/getData";
 import CarsData from "../../assets/data/CarsData";
 import Cars from "./Cars";
+import SelectFilter from "./subcomponents/SelectFilter";
+import {Loading} from "./subcomponents/Loading";
 
 const Filters = () => {
-  const [data, setData] = useState(CarsData);
+  const [data, setData] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
   const [sort, setSort] = useState(false);
+  const [sortedData, setSortedData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  const clearFiltersButtonRef = useRef(null);
 
   const [selectedCarType, setSelectedCarType] = useState("Wszystkie");
   const [selectedCarBrand, setSelectedCarBrand] = useState("Wszystkie");
   const [selectedCarPriceCategory, setSelectedCarPriceCategory] =
     useState("Wszystkie");
-  const carTypes = Array.from(
-    new Set(CarsData.map((item, index) => item.type))
+
+  const carTypes = useMemo(
+    () => Array.from(new Set(originalData.map((item, index) => item.type))),
+    [originalData]
   );
-  const PriceCategories = Array.from(
-    new Set(CarsData.map((item, index) => item.category))
+  const PriceCategories = useMemo(
+    () => Array.from(new Set(originalData.map((item, index) => item.category))),
+    [originalData]
   );
-  const carBrands = Array.from(
-    new Set(CarsData.map((item, index) => item.brand))
+  const carBrands = useMemo(
+    () => Array.from(new Set(originalData.map((item, index) => item.brand))),
+    [originalData]
   );
+
+  useEffect(() => {
+    let timeout = null;
+    const fetchData = async () => {
+      timeout = setTimeout(() => setIsLoading(true), 500);
+      const data = await getCarsList();
+      clearTimeout(timeout); 
+      setIsLoading(false);
+      setData(data);
+      setOriginalData(data);
+    };
+    fetchData();
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     applyFilters();
-  }, [selectedCarBrand, selectedCarPriceCategory, selectedCarType, sort]);
+  }, [selectedCarBrand, selectedCarPriceCategory, selectedCarType]);
 
   useEffect(() => {
-    document
-      .getElementById("clearFiltersButton")
-      .addEventListener("click", () => {
-        setSelectedCarType("Wszystkie");
-        setSelectedCarBrand("Wszystkie");
-        setSelectedCarPriceCategory("Wszystkie");
-      });
-  });
+    clearFiltersButtonRef.current.addEventListener("click", () => {
+      setSelectedCarType("Wszystkie");
+      setSelectedCarBrand("Wszystkie");
+      setSelectedCarPriceCategory("Wszystkie");
+    });
+  }, []);
+
+  const applyTypeFilter = useCallback(
+    (current) => current.type === selectedCarType,
+    [selectedCarType]
+  );
+  const applyBrandFilter = useCallback(
+    (current) => current.brand === selectedCarBrand,
+    [selectedCarBrand]
+  );
+  const applyPriceCategoryFilter = useCallback(
+    (current) => current.category === selectedCarPriceCategory,
+    [selectedCarPriceCategory]
+  );
 
   const applyFilters = () => {
-    let updatedCarsData = CarsData;
+    let updatedCarsData = sortedData.length > 0 ? sortedData : data;
     if (selectedCarType !== "Wszystkie") {
-      updatedCarsData = updatedCarsData.filter((current) => {
-        return current.type === selectedCarType;
-      });
+      updatedCarsData = updatedCarsData.filter(applyTypeFilter);
     }
     if (selectedCarBrand !== "Wszystkie") {
-      updatedCarsData = updatedCarsData.filter((current) => {
-        return current.brand === selectedCarBrand;
-      });
+      updatedCarsData = updatedCarsData.filter(applyBrandFilter);
     }
     if (selectedCarPriceCategory !== "Wszystkie") {
-      updatedCarsData = updatedCarsData.filter((current) => {
-        return current.category === selectedCarPriceCategory;
-      });
+      updatedCarsData = updatedCarsData.filter(applyPriceCategoryFilter);
     }
     setData(updatedCarsData);
   };
@@ -67,80 +102,53 @@ const Filters = () => {
   };
 
   const handleSortData = (e) => {
-    let sortByFuel = [];
-    if (e.target.value === "fuelAsc") {
-     sortByFuel = CarsData.sort((a, b) => (a.fuelConsumption > b.fuelConsumption ? 1 : -1));
-    }
-    else if((e.target.value === "fuelDesc")){
-     sortByFuel = CarsData.sort((a, b) => (a.fuelConsumption < b.fuelConsumption ? 1 : -1));
-    }
-    else if(e.target.value === " "){
-      sortByFuel = CarsData;
+    const value = e.target.value;
+    let sortedCarsData = [];
+    if (value === "fuelAsc") {
+      sortedCarsData = originalData.sort((a, b) =>
+        a.fuelConsumption > b.fuelConsumption ? 1 : -1
+      );
+    } else if (value === "fuelDesc") {
+      sortedCarsData = originalData.sort((a, b) =>
+        a.fuelConsumption > b.fuelConsumption ? -1 : 1
+      );
+    } else if (value === "default") {
+      sortedCarsData = originalData.slice();
+      sortedCarsData.sort(() => Math.random() - 0.5);
     }
     setSort(!sort);
-    setData(sortByFuel);
+    setSortedData(sortedCarsData);
+    setData(sortedCarsData);
   };
+  console.log(data);
 
-  
-  console.log(data)
+
+
   return (
     <div>
       <div className=" py-3 border-b-2 mb-2">
         <div className="mx-auto flex flex-wrap items-center justify-center gap-1 max-w-screen-2xl">
-          <div className="p-2 ">
-            <label className="text-lg">
-              Typ nadwozia
-              <select
-                className="block px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm w-52 focus:outline-none focus:ring-blue focus:border-blue focus:ring-2"
-                onChange={handleCarTypeChange}
-                value={selectedCarType}
-              >
-                <option defaultValue={"Wszystkie"}>Wszystkie</option>
-                {carTypes.map((item, index) => (
-                  <option key={index} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <div className="p-2 ">
-            <label className="text-lg">
-              Marka
-              <select
-                className="block px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm w-52 focus:outline-none focus:ring-blue focus:border-blue focus:ring-2"
-                onChange={handleCarBrandChange}
-                value={selectedCarBrand}
-              >
-                <option defaultValue={"Wszystkie"}>Wszystkie</option>
-                {carBrands.map((item, index) => (
-                  <option key={index} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <div className="p-2 ">
-            <label className="text-lg">
-              Kategoria cenowa
-              <select
-                className="block px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm w-52 focus:outline-none focus:ring-blue focus:border-blue focus:ring-2"
-                onChange={handleCarPriceCategoryChange}
-                value={selectedCarPriceCategory}
-              >
-                <option defaultValue={"Wszystkie"}>Wszystkie</option>
-                {PriceCategories.map((item, index) => (
-                  <option key={index} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
+          <SelectFilter
+            label="Typ nadwozia"
+            options={carTypes}
+            selectedOption={selectedCarType}
+            handleChange={handleCarTypeChange}
+          />
+          <SelectFilter
+            label="Marka"
+            options={carBrands}
+            selectedOption={selectedCarBrand}
+            handleChange={handleCarBrandChange}
+          />
+          <SelectFilter
+            label="Kategoria cenowa"
+            options={PriceCategories}
+            selectedOption={selectedCarPriceCategory}
+            handleChange={handleCarPriceCategoryChange}
+          />
           <div className="p-2 mt-auto">
             <button
-              id="clearFiltersButton"
+              ref={clearFiltersButtonRef}
               className="px-6 py-3 bg-blue rounded-lg text-white"
             >
               Wyczyść filtry
@@ -148,10 +156,8 @@ const Filters = () => {
           </div>
         </div>
       </div>
-      <Cars
-        data={data}
-        handleSortData={handleSortData}
-      />
+      {isLoading ? <Loading/> : <Cars data={data} handleSortData={handleSortData} />}
+      
     </div>
   );
 };
