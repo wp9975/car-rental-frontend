@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { getCarItemBySlug } from "../../utils/getData";
 import CarsData from '../../assets/data/CarsData';
 import Confirmation from './subcomponents/Confirmation';
 import PersonalDetails from './subcomponents/PersonalDetails';
@@ -8,7 +9,7 @@ import RentalDetails from './subcomponents/RentalDetails';
 const Forms = (props) => {
   const {step} = props;
   const { carSlug } = useParams();
-  const carItem = CarsData.find((item) => item.carLink === carSlug);
+  const [carItem, setCarItem] = useState([]);
   const [carCategory, setCarCategory] = useState();
   const [calculations, setCalculations] = useState();
   const [formPersonalData, setFormPersonalData] = useState({
@@ -21,6 +22,11 @@ const Forms = (props) => {
     postalCode: ''
   });
  
+  useEffect(() => {
+    getCarItemBySlug(carSlug).then(response =>{
+      setCarItem(response);
+    })
+  }, [carSlug]);
 
   const displayForm = (step) => {
     if (step === 1){

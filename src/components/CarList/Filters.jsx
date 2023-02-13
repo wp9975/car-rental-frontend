@@ -117,7 +117,7 @@ const Filters = () => {
       sortedCarsData.sort(() => Math.random() - 0.5);
     }
     setSort(!sort);
-    setSortedData(sortedCarsData);
+    setSortedData(sortedCarsData)
     setData(sortedCarsData);
   };
   console.log(data);

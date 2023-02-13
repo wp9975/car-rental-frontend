@@ -20,7 +20,7 @@ module.exports = {
         800: '#000000',
         900: '#000000'
       },
-      'slate-gray': {
+      'slategray': {
         DEFAULT: '#64748B',
         50: '#CCD2DA',
         100: '#C0C8D2',
