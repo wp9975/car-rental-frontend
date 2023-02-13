@@ -42,6 +42,6 @@ export const getCarsListWithFilteringAndSorting = async (
 };
 
 export const getCarItemBySlug = async (slug) => {
-  const response = await axios.get("../../data/cars.json");
+  const response = await axios.get("./data/cars.json");
   return response.data.cars.find((car) => car.carLink === slug);
 };
