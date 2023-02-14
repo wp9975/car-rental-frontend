@@ -23,8 +23,8 @@ const Forms = (props) => {
   });
  
   useEffect(() => {
-    getCarItemBySlug(carSlug).then(response =>{
-      setCarItem(response);
+    getCarItemBySlug(carSlug).then(cars =>{
+      setCarItem(cars);
     })
   }, [carSlug]);
 
