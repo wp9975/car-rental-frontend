@@ -10,6 +10,7 @@ import ErrorPage from "./pages/ErrorPage";
 import ReservationPage from "./pages/ReservationPage";
 import CarListPage from "./pages/CarListPage";
 import ChooseCar from "./components/Reservation/ChooseCar";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -48,6 +49,12 @@ function App() {
           exact: true,
           name: "ReservationCar",
           element: <ReservationPage />,
+        },
+        {
+          path: "/car-rental-frontend/privacypolicy",
+          exact: true,
+          name: "PrivacyPolicy",
+          element: <PrivacyPolicyPage />,
         }
       ],
     },

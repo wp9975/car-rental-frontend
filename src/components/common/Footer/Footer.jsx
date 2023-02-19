@@ -1,6 +1,7 @@
 import React from "react";
 import SocialMedia from "./SocialMedia";
 import ScrollToTop from "./ScrollToTop";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -12,12 +13,12 @@ const Footer = () => {
         <SocialMedia />
         <div className="p-3 text-white">
         Copyright © 2023. All rights reserved.{" "}
-        <a
-          href="/"
+        <NavLink
+          to="/car-rental-frontend/privacypolicy"
           className="text-lg font-medium underline cursor-pointer underline-offset-4 hover:font-semibold"
         >
           Privacy Policy
-        </a>
+        </NavLink>
       </div>
         <ScrollToTop/>
       </div>

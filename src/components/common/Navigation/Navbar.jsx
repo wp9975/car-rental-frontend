@@ -8,7 +8,7 @@ import { navigationLinks } from "./navigationLinks";
 const Navbar = () => {
   const [expandNavbarToggle, setExpandNavbarToggle] = useState(false);
   const stylesLink =
-    " transition-all duration-500 ease-in px-16 py-4 text-2xl  md:pt-4 md:border-t-2 border-slate md:text-lg md:px-6 md:py-2 text-white bg-darkgray md:bg-gray rounded-xl md:rounded-none";
+    " transition-all duration-500 ease-in px-16 py-4 text-2xl  md:pt-4 md:border-t-2 border-slate hover:border-white md:text-lg md:px-6 md:py-2 text-white bg-darkgray md:bg-gray rounded-xl md:rounded-none";
   const stylesLinkActive =
     " transition-all duration-500 ease-in px-16 py-4 text-2xl  md:border-t-2 border-white md:text-lg md:px-6 md:py-2 md:text-white bg-white md:bg-gray text-blackCoffee underline underline-offset-2 rounded-xl md:rounded-none";
 

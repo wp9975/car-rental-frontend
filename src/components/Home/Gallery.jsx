@@ -2,7 +2,7 @@ import React from 'react'
 
 const Gallery = () => {
   return (
-    <div className="flex flex-wrap md:-m-2 -m-1 bg-snow py-6">
+    <div className="flex flex-wrap -m-1 bg-snow py-6  w-full">
       <div className="flex flex-wrap md:w-1/2">
         <div className="md:p-2 p-1 w-1/2 hidden md:block">
           <img alt="gallery" className="w-full object-cover h-full object-center block" src="https://images.unsplash.com/photo-1582639510494-c80b5de9f148?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1743&q=80"/>
