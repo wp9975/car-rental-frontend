@@ -3,6 +3,7 @@ import { AiOutlineMail, AiTwotonePhone } from "react-icons/ai";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import EmployeesData from "../../assets/data/EmployeesData";
 
+
 const Team = () => {
   const slideLeft = () => {
     const slider = document.getElementById("slider");

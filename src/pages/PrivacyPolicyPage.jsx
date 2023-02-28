@@ -43,7 +43,7 @@ const PrivacyPolicyPage = () => {
       </h2>
       <div className="pb-5 flex flex-col items-center justify-center space-y-4 max-w-screen-xl">
         {policies.map((item, index) => (
-          <div className="p-5 rounded-lg bg-slategray-200 ">
+          <div key={index} className="p-5 rounded-lg bg-slategray-200 ">
             <h3 className="text-lg font-bold text-black">{index+1}. {item.header}</h3>
             <p className="text-md">{item.desc}</p>
           </div>
