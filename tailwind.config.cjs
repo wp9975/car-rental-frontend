@@ -3,6 +3,12 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
+    backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      '400%': '400%',
+    },
     screens: {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }

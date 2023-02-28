@@ -1,18 +1,18 @@
 import React from "react";
 
-const AboutUs = () => {
+const AboutUsSection = () => {
   return (
-    <section className="bg-snow">
+    <section className="">
       <div className="container m-auto px-3 py-5 md:px-8 text-blackCoffee">
-        <div className="space-y-6 py-5 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
-          <div className="md:5/12 lg:w-5/12">
+        <div className="bg-snow rounded-xl my-5 pace-y-6 py-5  md:flex md:gap-6 lg:items-center lg:gap-12">
+          <div className=" md:5/12 lg:w-5/12">
             <img
               src="https://img.freepik.com/free-photo/stylish-elegant-woman-car-salon_1157-20980.jpg?w=1800&t=st=1675015533~exp=1675016133~hmac=e4b38bc6aeb866aac60798e661601edad9c9f746436fea28391486219234f21e"
               alt=""
               loading="lazy"
             />
           </div>
-          <div className="md:7/12 lg:w-6/12">
+          <div className="md:7/12 lg:w-6/12 m-2 md:m-5">
             <h2 className="text-2xl text-gray font-bold md:text-4xl">
             20 lat na polskim rynku
             </h2>
@@ -30,8 +30,8 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
-        <div className="space-y-6 py-5 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
-          <div className="md:7/12 lg:w-6/12">
+        <div className="bg-snow rounded-xl space-y-6 py-5 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
+          <div className="md:7/12 lg:w-6/12 m-2 md:m-5">
             <h2 className="text-2xl text-gray font-bold md:text-4xl">
             Profesjonalna obsługa
             </h2>
@@ -61,4 +61,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default AboutUsSection;

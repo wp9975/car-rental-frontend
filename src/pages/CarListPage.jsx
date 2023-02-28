@@ -1,6 +1,5 @@
 import React from 'react'
-import Cars from '../components/CarList/Cars'
-import Filters from '../components/CarList/Filters'
+import Filters from '../components/CarListPageComponents/Filters'
 
 const CarListPage = () => {
   return (

@@ -1,13 +1,14 @@
 import React from 'react'
-import AboutUs from '../components/About/AboutUsSection'
-import InNumbers from '../components/About/InNumbersSection'
-import TeamSection from '../components/About/TeamSection'
+import TeamSection from '../components/AboutPageComponents/TeamSection'
+import AboutUsSection from '../components/AboutPageComponents/AboutUsSection'
+import InNumbersSection from '../components/AboutPageComponents/InNumbersSection'
+
 
 const AboutUsPage = () => {
   return (
     <div>
-      <AboutUs/>
-      <InNumbers/>
+      <AboutUsSection/>
+      <InNumbersSection/>
       <TeamSection/>
     </div>
   )
