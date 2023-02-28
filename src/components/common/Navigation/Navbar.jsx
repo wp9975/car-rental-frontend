@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import LinkNav from "./LinkNav";
 import { navigationLinks } from "./navigationLinks";
 
+
 const Navbar = () => {
   const [expandNavbarToggle, setExpandNavbarToggle] = useState(false);
   const [navBackground, setNavBackground] = useState("transparent");
@@ -28,6 +29,8 @@ const Navbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+
 
   return (
     <header
