@@ -9,9 +9,10 @@ import RentalDetails from './subcomponents/RentalDetails';
 const Forms = (props) => {
   const {step} = props;
   const { carSlug } = useParams();
-  const [carItem, setCarItem] = useState([]);
+  const [carItem, setCarItem] = useState();
   const [carCategory, setCarCategory] = useState();
   const [calculations, setCalculations] = useState();
+
   const [formPersonalData, setFormPersonalData] = useState({
     firstName: '',
     lastName: '',
@@ -22,6 +23,8 @@ const Forms = (props) => {
     postalCode: ''
   });
  
+
+
   useEffect(() => {
     getCarItemBySlug(carSlug).then(cars =>{
       setCarItem(cars);

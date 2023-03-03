@@ -6,6 +6,9 @@ import {
   BiError,
 } from "react-icons/bi";
 import CarInfoCard from "./CarInfoCard";
+import CarInfoCardNew from "./CarInfoCardNew";
+import CarInfoLoading from "./CarInfoSkeletonLoading";
+import CarInfoSkeletonLoading from "./CarInfoSkeletonLoading";
 
 const RentalDetails = (props) => {
   const { calculations, setCalculations, carItem } = props;
@@ -15,7 +18,13 @@ const RentalDetails = (props) => {
   const [distance, setDistance] = useState(20);
   const [driverLicenseYear, setDriverLicenseYear] = useState();
   const [errorMessage, setErrorMessage] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    if (props.carItem) {
+      setIsLoading(false);
+    }
+  }, [props.carItem]);
 
 
   useEffect(() => {
@@ -76,13 +85,25 @@ const RentalDetails = (props) => {
     }
   };
 
+
+
+  useEffect(() => {
+    setIsLoading(true);
+  
+    if (props.carItem) {
+      setIsLoading(false);
+    }
+    
+  }, [props.carItem, isLoading]);
+
   return (
     <div className="container mx-auto ">
       <div className="border-2 p-2 rounded-lg bg-snow m-2">
         <h2 className="text-4xl text-bold text-center pb-4">
           Wybrany samochód:
         </h2>
-        <CarInfoCard carItem={carItem}/>
+        {isLoading ? 
+        <CarInfoSkeletonLoading/> : <CarInfoCardNew carItem={carItem}/>}
       </div>
       <div className="border-2 p-2 rounded-lg bg-snow m-2">
         <div className="flex flex-col items-center justify-center">

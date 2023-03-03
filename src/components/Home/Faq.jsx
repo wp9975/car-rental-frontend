@@ -5,21 +5,21 @@ import FaqCard from "./subcomponents/FaqCard";
 const data = [
   {
     id: 1,
-    question: "What features are included?",
+    question: "Jakie dokumenty potrzebuję do wynajmu samochodu?",
     answer:
-      "Etiam egestas fringilla enim, id convallis lectus laoreet at Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque.",
+      "Aby wynająć samochód, potrzebujesz ważnego prawa jazdy oraz dowodu osobistego lub paszportu.",
   },
   {
     id: 2,
-    question: "What features are included?",
+    question: "Jak długo mogę wypożyczyć samochód?",
     answer:
-      "Etiam egestas fringilla enim, id convallis lectus laoreet at Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque.",
+      "Okres wypożyczenia zależy od Twoich potrzeb. Oferujemy wynajem na godziny, dni, tygodnie i nawet miesiące.",
   },
   {
     id: 3,
-    question: "What features are included?",
+    question: "Czy mogę zwrócić samochód w innej lokalizacji niż ta, w której go wynająłem?",
     answer:
-      "Etiam egestas fringilla enim, id convallis lectus laoreet at Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque.",
+      "Tak, oferujemy możliwość zwrotu samochodu w innej lokalizacji. Należy jednak pamiętać, że może to wiązać się z dodatkowymi kosztami. Prosimy o kontakt z naszym biurem obsługi klienta w celu uzyskania więcej informacji.",
   },
   {
     id: 4,
