@@ -4,7 +4,7 @@ import CarSearchForm from "./subcomponents/CarSearchForm";
 
 const Hero = () => {
   return (
-    <section className="relative h-screen flex items-center -top-[72px] bg-cover bg-center bg-no-repeat bg-[url(https://images.unsplash.com/photo-1608564697071-ddf911d81370?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80)]">
+    <section className="relative h-screen flex items-center  bg-cover bg-center bg-no-repeat bg-[url(https://images.unsplash.com/photo-1608564697071-ddf911d81370?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80)]">
       <div className="absolute inset-0 bg-gray/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-gray/80 sm:to-silver/15"></div>
 
       <div className="relative px-4 mx-auto max-w-screen-2xl sm:px-6 lg:flex justify-between lg:h-screen lg:items-center lg:px-8">

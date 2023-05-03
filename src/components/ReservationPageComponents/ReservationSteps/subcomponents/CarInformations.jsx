@@ -1,4 +1,18 @@
-import { Card, CardContent, Grid, Paper, Typography } from "@mui/material";
+import { LocalOffer } from "@mui/icons-material";
+import {
+  Card,
+  CardContent,
+  Grid,
+  Paper,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Chip,
+  Box,
+} from "@mui/material";
 import React from "react";
 import { Slide, Fade } from "react-reveal";
 
@@ -8,29 +22,57 @@ const CarInformations = (props) => {
 
   return (
     <Grid item xs={12} md={6}>
-      <Paper className="" elevation={3}>
+      <Paper elevation={3}>
         <Slide right cascade>
-        <Card>
+          <Card>
             <CardContent>
-          <Typography variant="h4" gutterBottom>
-            {`${brand} ${model}`}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            Kategoria: {category}
-          </Typography>
-          </CardContent>
+              <Typography variant="h4" gutterBottom className="flex justify-between">
+                {`${brand} ${model}`}
+                <Box component="span" marginLeft={1}>
+                  <Chip
+                    icon={<LocalOffer />}
+                    label={`Kategoria: ${category}`}
+                    color="primary"
+                    variant="outlined"
+                    size="medium"
+                  />
+                </Box>
+              </Typography>
+            </CardContent>
           </Card>
           <Card>
             <CardContent>
               <Typography variant="h6">Informacje o samochodzie:</Typography>
-              <Typography variant="body1">Typ: {type}</Typography>
-              <Typography variant="body1">Paliwo: {fuel}</Typography>
-              <Typography variant="body1">
-                Średnie spalanie: {fuelConsumption}
-              </Typography>
-              <Typography variant="body1">
-                Liczba dostępnych sztuk: {quantity}
-              </Typography>
+              <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                  <TableBody>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        Typ:
+                      </TableCell>
+                      <TableCell align="right">{type}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        Paliwo:
+                      </TableCell>
+                      <TableCell align="right">{fuel}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        Średnie spalanie:
+                      </TableCell>
+                      <TableCell align="right">{fuelConsumption}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        Liczba dostępnych sztuk:
+                      </TableCell>
+                      <TableCell align="right">{quantity}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </CardContent>
           </Card>
         </Slide>

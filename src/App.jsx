@@ -11,6 +11,7 @@ import ReservationPage from "./pages/ReservationPage";
 import CarListPage from "./pages/CarListPage";
 import ChooseCar from "./components/Reservation/ChooseCar";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import ReservationSuccess from "./pages/ReservationSuccess";
 
 function App() {
   const router = createBrowserRouter([
@@ -43,6 +44,12 @@ function App() {
           exact: true,
           name: "Reservation",
           element: <ChooseCar />,
+        },
+        {
+          path: "/car-rental-frontend/reservation/success",
+          exact: true,
+          name: "Reservation Success",
+          element: <ReservationSuccess />,
         },
         {
           path: "/car-rental-frontend/reservation/:carSlug",

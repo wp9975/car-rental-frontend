@@ -5,7 +5,7 @@ import ReservationService from '../components/ReservationPageComponents/Reservat
 
 const ReservationPage = () => {
   return (
-    <div >
+    <div className='h-screen'>
       <ReservationService/>
     </div>
   )

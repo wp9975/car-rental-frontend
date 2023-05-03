@@ -126,7 +126,7 @@ const Filters = () => {
 
   return (
     <div>
-      <div className=" py-3 border-b-2 mb-2">
+      <div className=" pt-20 py-3 border-b-2 mb-2">
         <div className="mx-auto flex flex-wrap items-center justify-center gap-1 max-w-screen-2xl">
           <SelectFilter
             label="Typ nadwozia"

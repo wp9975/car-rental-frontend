@@ -1,4 +1,6 @@
 import React from "react";
+import { motion, useAnimation } from "framer-motion";
+import { InView } from "react-intersection-observer";
 
 import FaqCard from "./subcomponents/FaqCard";
 
@@ -30,30 +32,38 @@ const data = [
 ];
 
 const Faq = () => {
-  
+  const controls = useAnimation();
+  const fadeIn = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
 
-  
+  const handleInView = (inView, entry) => {
+    if (inView) {
+      controls.start("visible");
+    }
+  };
 
   return (
     <div className="bg-snow">
-      <div className="container px-4 py-6 mx-auto  xl:max-w-7xl lg:px-8 lg:py-14">
-        <div className="text-center">
-          <div className="mb-1 text-sm font-bold tracking-wider text-purple-700 uppercase">
-            Odpowiadamy na
+      <div className="container px-4 py-6 mx-auto xl:max-w-7xl lg:px-8 lg:py-14">
+        {/* ... */}
+        <InView as="div" onChange={handleInView} threshold={0.1}>
+          <div className="flex flex-col">
+            {data.map((item, index) => (
+              <motion.div
+                key={item.id}
+                className="mt-6 space-y-3"
+                initial="hidden"
+                animate={controls}
+                variants={fadeIn}
+                transition={{ delay: index * 0.2, duration: 0.5 }}
+              >
+                <FaqCard question={item.question} answer={item.answer} />
+              </motion.div>
+            ))}
           </div>
-          <h2 className="mb-4 text-3xl font-extrabold md:text-4xl">
-            Najczęściej zadawane pytania
-          </h2>
-        </div>
-
-        <div className="flex flex-col">
-          {data.map((item) => (
-            <div key={item.id} className="mt-6 space-y-3">
-                  <FaqCard question={item.question} answer={item.answer}/> 
-            </div>
-          ))}
-        </div>
-
+        </InView>
       </div>
     </div>
   );

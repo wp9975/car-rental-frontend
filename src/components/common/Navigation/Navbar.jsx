@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`navbar sticky  z-50 top-0 left-0 transition-all duration-500 ease-in`}
+      className={`navbar fixed w-screen  z-50 top-0 left-0 transition-all duration-500 ease-in`}
       style={{ backgroundColor: navBackground }}
     >
       <div className=" mx-auto max-w-screen-xl">

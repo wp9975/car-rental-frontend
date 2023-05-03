@@ -42,7 +42,7 @@ const TeamSection = () => {
   };
   return (
     <div className="">
-      <h2 className="">TeamSection</h2>
+      
       <div className="mb-10">
         <Slider {...settings} className="mx-auto my-4 w-4/5 max-w-screen-3xl">
           {EmployeesData.map((item, index) => (
